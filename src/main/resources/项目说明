@@ -1,0 +1,128 @@
+#===================================================================================================
+#	多数据源配置说明
+#===================================================================================================
+1、配置文件
+	application-more.properties
+2、作用
+	可配置多个数据源便于数据库切换
+3、包含jar、文件、方法
+-- jar包
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-aop</artifactId>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <scope>runtime</scope>
+	</dependency>
+	<!-- MyBatis plus增强和springboot的集成 -->
+	<dependency>
+		<groupId>com.baomidou</groupId>
+		<artifactId>mybatis-plus</artifactId>
+		<version>${mybatis-plus.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.baomidou</groupId>
+		<artifactId>mybatisplus-spring-boot-starter</artifactId>
+		<version>${mybatisplus-spring-boot-starter.version}</version>
+	</dependency>
+-- 基础配置
+	com.springboot.common.annotion.DataSourceMore
+	com.springboot.common.aop.MultiSourceExAop
+	com.springboot.common.mutidatesource.DataSourceContextHolder
+	com.springboot.common.mutidatesource.DSEnum
+	com.springboot.common.mutidatesource.DynamicDataSource
+-- 多数据源配置
+	com.springboot.config.properties.CoreProperties
+	com.springboot.config.properties.ScottProperties
+	com.springboot.config.MybatisPlusConfig
+4、测试类
+	com.springboot.common.model.User
+	com.springboot.mapper.UserMapper
+	com.springboot.service.UserService
+	com.springboot.service.impl.UserServiceImpl 实现时注意数据源配置
+	com.springboot.controller.DriudController
+
+#===================================================================================================
+#	druid配置说明
+#===================================================================================================
+1、配置文件
+	application-druid.properties
+2、作用
+	Druid Spring Boot Starter 用于帮助你在Spring Boot项目中轻松集成Druid数据库连接池和监控。，
+	项目启动后可通过http://localhost:8080/druid/index.html访问
+3、jar（依赖于多数据源jar）
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid</artifactId>
+		<version>${druid.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid-spring-boot-starter</artifactId>
+		<version>${druid.version}</version>
+	</dependency>
+#===================================================================================================
+#	拦截器配置说明
+#===================================================================================================
+1、包含文件、方法（）
+	com.springboot.interceptor.UserTokenInterceptor  创建拦截器
+	com.springboot.config.WebMvcConfig  注册拦截器
+
+#===================================================================================================
+#	Quartz配置说明
+#===================================================================================================
+1、包含文件、方法
+com.springboot.config.QuartzConfig
+com.springboot.config.JobFactory
+com.springboot.controller.QuartzController 请求触发定时任务
+2、jar
+	<!-- 定时任务 -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-quartz</artifactId>
+	</dependency>
+	<!--定时任务需要依赖context模块 -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+	</dependency>
+
+#===================================================================================================
+#	Excel配置说明
+#===================================================================================================
+1、包含文件、方法
+com.springboot.utils.TestFileUtil
+com.springboot.excel.*
+使用外部包的类
+com.alibaba.excel.metadata.CellExtra
+com.alibaba.excel.read.processor.AnalysisEventProcessor
+com.alibaba.excel.enums.CellExtraTypeEnum
+2、jar包
+	<!-- excel -->
+	<!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>easyexcel</artifactId>
+		<version>${easyexcel.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+	<dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi</artifactId>
+		<version>${poi.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+	<dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi-ooxml</artifactId>
+		<version>${poi.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+	<dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi-ooxml-schemas</artifactId>
+		<version>${poi.version}</version>
+	</dependency>
